@@ -178,7 +178,7 @@ export default function Preloader({ onDone }: { onDone: () => void }) {
         <div className="name-enter absolute inset-0 flex flex-col items-center justify-center px-6">
           <svg
             viewBox="0 0 900 150"
-            className="w-full max-w-[620px]"
+            className="w-[86%] max-w-[620px] sm:w-full"
             style={{
               filter: "drop-shadow(0 0 22px rgba(212, 175, 55, 0.18))",
             }}
@@ -205,7 +205,8 @@ export default function Preloader({ onDone }: { onDone: () => void }) {
             </text>
           </svg>
 
-          <p className="role-enter label mt-7 !text-ink/60">
+          {/* kept on a single line, always narrower than the name above it */}
+          <p className="role-enter label mt-5 whitespace-nowrap !text-[clamp(7.5px,2.2vw,11px)] !text-ink/60 md:mt-7">
             Web Developer · UI/UX &amp; Graphic Designer
           </p>
         </div>

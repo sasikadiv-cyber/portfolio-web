@@ -17,8 +17,6 @@ const field =
   "field w-full rounded-[12px] border border-line bg-paper px-3 py-2.5 text-[14.5px] text-ink placeholder:text-mute/70 transition-colors duration-200 focus:border-ink focus:outline-none";
 
 export default function ContactPage() {
-  useReveal(true);
-
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -31,6 +29,10 @@ export default function ContactPage() {
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
   const [serverError, setServerError] = useState("");
+
+  /* re-run the reveal observer whenever the form is swapped for the success
+     panel (and back) — freshly mounted [data-reveal] nodes start invisible */
+  useReveal(true, sent);
 
   const set = (k: keyof typeof form) => (v: string) =>
     setForm((f) => ({ ...f, [k]: v }));

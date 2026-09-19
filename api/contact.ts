@@ -73,8 +73,11 @@ const rateLimited = (ip: string) => {
   return recent.length > MAX_PER_WINDOW;
 };
 
-const clientIp = (req: ApiRequest) =>
-  (req.headers?.["x-forwarded-for"]?.split(",")[0] ?? "").trim() || "unknown";
+const clientIp = (req: ApiRequest) => {
+  const fwd = req.headers?.["x-forwarded-for"];
+  const raw = Array.isArray(fwd) ? fwd[0] : fwd;
+  return (raw?.split(",")[0] ?? "").trim() || "unknown";
+};
 
 /* ---------- email template helpers ---------- */
 
@@ -89,11 +92,19 @@ const esc = (s: string) =>
 /** escape + preserve line breaks in the message body */
 const br = (s: string) => esc(s).replace(/\n/g, "<br />");
 
-/** one label/value row of the details table */
+/** one label/value row — a soft rounded tile, matching the site's cards */
 const row = (label: string, value: string) => `
   <tr>
-    <td style="padding:7px 0;vertical-align:top;width:112px;color:#d4af37;font-family:Helvetica,Arial,sans-serif;font-size:10.5px;letter-spacing:2.5px;text-transform:uppercase;">${label}</td>
-    <td style="padding:7px 0;vertical-align:top;color:#efece4;font-family:Helvetica,Arial,sans-serif;font-size:14px;line-height:1.5;">${value}</td>
+    <td style="padding:0 0 8px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#141417;border:1px solid #232327;border-radius:14px;">
+        <tr>
+          <td style="padding:12px 18px;">
+            <div style="color:#d4af37;font-family:Helvetica,Arial,sans-serif;font-size:9.5px;letter-spacing:2.4px;text-transform:uppercase;padding-bottom:5px;">${label}</div>
+            <div style="color:#efece4;font-family:Helvetica,Arial,sans-serif;font-size:14.5px;line-height:1.5;">${value}</div>
+          </td>
+        </tr>
+      </table>
+    </td>
   </tr>`;
 
 type Details = {
@@ -131,28 +142,39 @@ const htmlEmail = (d: Details) => {
 <tr>
 <td align="center" style="padding:44px 14px;">
 
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;background-color:#101013;border:1px solid #232327;">
+<!-- card — soft rounded, matching the site's panels -->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;background-color:#101013;border:1px solid #232327;border-radius:24px;overflow:hidden;">
 
   <!-- header -->
   <tr>
-    <td style="padding:34px 38px 26px;border-bottom:1px solid #232327;">
+    <td style="padding:32px 34px 26px;">
       <table role="presentation" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td style="padding-right:16px;">
-            <div style="width:46px;height:46px;border:1px solid #d4af37;color:#d4af37;font-family:Georgia,'Times New Roman',serif;font-size:17px;letter-spacing:2px;line-height:46px;text-align:center;">SR</div>
+          <td style="padding-right:15px;">
+            <!-- circular monogram -->
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td width="48" height="48" align="center" valign="middle" style="width:48px;height:48px;background-color:#08080a;border:1px solid #d4af37;border-radius:999px;color:#d4af37;font-family:Georgia,'Times New Roman',serif;font-size:16px;letter-spacing:1.5px;text-align:center;">SR</td>
+              </tr>
+            </table>
           </td>
           <td style="vertical-align:middle;">
-            <div style="color:#d4af37;font-family:Helvetica,Arial,sans-serif;font-size:10px;letter-spacing:3.5px;text-transform:uppercase;">New enquiry</div>
-            <div style="color:#efece4;font-family:Georgia,'Times New Roman',serif;font-size:21px;padding-top:5px;">${name}</div>
+            <!-- pill badge -->
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td style="background-color:rgba(212,175,55,0.12);border:1px solid rgba(212,175,55,0.35);border-radius:999px;padding:5px 13px;color:#d4af37;font-family:Helvetica,Arial,sans-serif;font-size:9px;letter-spacing:2.6px;text-transform:uppercase;">New enquiry</td>
+              </tr>
+            </table>
+            <div style="color:#efece4;font-family:Helvetica,Arial,sans-serif;font-size:22px;font-weight:500;letter-spacing:-0.5px;padding-top:9px;">${name}</div>
           </td>
         </tr>
       </table>
     </td>
   </tr>
 
-  <!-- details -->
+  <!-- details — rounded tiles -->
   <tr>
-    <td style="padding:26px 38px 6px;">
+    <td style="padding:0 34px;">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
         ${row("Name", name)}
         ${row("Email", `<a href="mailto:${email}" style="color:#d4af37;text-decoration:none;">${email}</a>`)}
@@ -162,26 +184,36 @@ const htmlEmail = (d: Details) => {
     </td>
   </tr>
 
-  <!-- message -->
+  <!-- message — rounded quote card -->
   <tr>
-    <td style="padding:22px 38px 4px;">
-      <div style="border-left:2px solid #d4af37;padding:6px 0 6px 20px;">
-        <div style="color:#d4af37;font-family:Helvetica,Arial,sans-serif;font-size:10px;letter-spacing:3.5px;text-transform:uppercase;padding-bottom:10px;">Project</div>
-        <div style="color:#b6b3aa;font-family:Georgia,'Times New Roman',serif;font-size:15.5px;line-height:1.75;">${br(d.message)}</div>
-      </div>
+    <td style="padding:14px 34px 0;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#141417;border:1px solid #232327;border-radius:18px;">
+        <tr>
+          <td style="padding:20px 22px;">
+            <div style="color:#d4af37;font-family:Helvetica,Arial,sans-serif;font-size:9.5px;letter-spacing:2.6px;text-transform:uppercase;padding-bottom:11px;">The project</div>
+            <div style="color:#b6b3aa;font-family:Helvetica,Arial,sans-serif;font-size:15px;line-height:1.75;">${br(d.message)}</div>
+          </td>
+        </tr>
+      </table>
     </td>
   </tr>
 
-  <!-- reply button -->
+  <!-- reply button — a pill -->
   <tr>
-    <td style="padding:26px 38px 34px;">
-      <a href="mailto:${email}?subject=Re%3A%20your%20enquiry" style="display:inline-block;background-color:#d4af37;color:#08080a;font-family:Helvetica,Arial,sans-serif;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;text-decoration:none;padding:13px 26px;">Reply to ${firstName}</a>
+    <td style="padding:26px 34px 32px;">
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td style="background-color:#d4af37;border-radius:999px;">
+            <a href="mailto:${email}?subject=Re%3A%20your%20enquiry" style="display:inline-block;color:#08080a;font-family:Helvetica,Arial,sans-serif;font-size:12px;font-weight:bold;letter-spacing:1.8px;text-transform:uppercase;text-decoration:none;padding:14px 30px;border-radius:999px;">Reply to ${firstName} &#8594;</a>
+          </td>
+        </tr>
+      </table>
     </td>
   </tr>
 
   <!-- footer -->
   <tr>
-    <td style="padding:16px 38px;border-top:1px solid #232327;">
+    <td style="padding:18px 34px 24px;border-top:1px solid #232327;">
       <div style="color:#83837d;font-family:Helvetica,Arial,sans-serif;font-size:11.5px;line-height:1.7;">
         Sent from your portfolio contact form — hit reply and it goes straight to
         <span style="color:#d4af37;">${email}</span>
