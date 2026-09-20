@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ARCHIVE } from "../data/site";
+import PageBanner from "./PageBanner";
 import { useReveal } from "../lib/hooks";
 
 const FILTERS = ["All", "Website", "UI/UX", "Graphic Design"] as const;
@@ -31,30 +32,16 @@ export default function WorkPage({ onContact }: { onContact: () => void }) {
   );
 
   return (
-    <main className="mx-auto max-w-7xl px-6 pb-20 md:px-10 md:pb-28">
-      {/* header */}
-      <header className="pt-20 md:pt-28">
-        <p data-reveal className="label mb-6">
-          Archive — 2020 / 2026
-        </p>
-        <div className="max-w-2xl">
-          <h1
-            className="t-mask text-[clamp(2rem,5vw,3.4rem)] leading-[1.1] font-medium text-ink"
-            style={{ ["--rv-delay" as string]: "60ms" }}
-          >
-            <span>The work, end to end.</span>
-          </h1>
-          <p
-            data-reveal
-            style={{ ["--rv-delay" as string]: "120ms" }}
-            className="mt-7 max-w-md text-[14.5px] leading-[1.7] text-mute"
-          >
-            {String(ARCHIVE.length).padStart(2, "0")} projects — websites,
-            interfaces and graphic identities, each taken from first sketch
-            to something shipped.
-          </p>
-        </div>
+    <main className="pb-20 md:pb-28">
+      {/* cinematic header */}
+      <PageBanner
+        page="work"
+        label="Archive — 2020 / 2026"
+        title="The work, end to end."
+        note={`${String(ARCHIVE.length).padStart(2, "0")} projects — websites, interfaces and graphic identities, each taken from first sketch to something shipped.`}
+      />
 
+      <div className="mx-auto max-w-7xl px-6 md:px-10">
         {/* filters */}
         <div
           data-reveal
@@ -84,10 +71,10 @@ export default function WorkPage({ onContact }: { onContact: () => void }) {
             );
           })}
         </div>
-      </header>
+      </div>
 
       {/* list */}
-      <div key={filter}>
+      <div key={filter} className="mx-auto max-w-7xl px-6 md:px-10">
         {items.map((p, i) => {
           const odd = i % 2 === 1;
           return (
@@ -123,11 +110,11 @@ export default function WorkPage({ onContact }: { onContact: () => void }) {
                       alt={`${p.title} — ${p.client}`}
                       loading={i < 2 ? "eager" : "lazy"}
                       decoding="async"
-                      className="img-soft aspect-[4/3] w-full object-cover"
+                      className="project-thumb img-soft aspect-[4/3] w-full object-cover"
                     />
 
                     {/* open the case study */}
-                    <span className="absolute inset-0 z-[2] flex items-center justify-center bg-paper/45 opacity-0 backdrop-blur-[2px] transition-opacity duration-500 group-hover:opacity-100 max-md:opacity-100 max-md:items-end max-md:justify-end max-md:bg-transparent max-md:p-3 max-md:backdrop-blur-0">
+                    <span className="project-overlay absolute inset-0 z-[2] flex items-center justify-center bg-paper/45 opacity-0 backdrop-blur-[2px] transition-opacity duration-500 group-hover:opacity-100 max-md:opacity-100 max-md:items-end max-md:justify-end max-md:bg-transparent max-md:p-3 max-md:backdrop-blur-0">
                       <span className="case-chip flex items-center gap-2.5 rounded-full border border-accent/60 bg-paper/90 px-4 py-2.5 text-[13px] text-ink transition-transform duration-500 group-hover:scale-100 max-md:px-3 max-md:py-2 md:scale-95">
                         <ArrowIcon />
                         <span className="max-md:hidden">View case study</span>
@@ -207,7 +194,7 @@ export default function WorkPage({ onContact }: { onContact: () => void }) {
       {/* next step */}
       <div
         data-reveal
-        className="mt-14 flex flex-col gap-6 border-t border-line pt-14 md:mt-20 md:flex-row md:items-end md:justify-between md:pt-20"
+        className="mx-auto mt-14 flex max-w-7xl flex-col gap-6 border-t border-line px-6 pt-14 md:mt-20 md:flex-row md:items-end md:justify-between md:px-10 md:pt-20"
       >
         <div>
           <p className="label mb-4">Next</p>

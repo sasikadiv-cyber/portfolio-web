@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { SERVICES } from "../data/site";
 import { useReveal } from "../lib/hooks";
+import PageBanner from "./PageBanner";
 
 const STEPS = [
   {
@@ -57,29 +58,16 @@ export default function ServicesPage({
   useReveal(true);
 
   return (
-    <main className="mx-auto max-w-7xl px-6 pb-20 md:px-10 md:pb-28">
-      {/* ---------------- header ---------------- */}
-      <header className="pt-20 md:pt-28">
-        <p data-reveal className="label mb-6">
-          Services
-        </p>
-        <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between md:gap-16">
-          <h1
-            className="t-mask max-w-2xl text-[clamp(2rem,5vw,3.4rem)] leading-[1.1] font-medium text-ink"
-            style={{ ["--rv-delay" as string]: "60ms" }}
-          >
-            <span>Four things I do, and how a project runs.</span>
-          </h1>
-          <p
-            data-reveal
-            style={{ ["--rv-delay" as string]: "120ms" }}
-            className="max-w-sm text-[14.5px] leading-[1.7] text-mute"
-          >
-            Projects typically run two to twelve weeks. Retainers are
-            available for ongoing development work.
-          </p>
-        </div>
-      </header>
+    <main className="pb-20 md:pb-28">
+      {/* ---------------- cinematic header ---------------- */}
+      <PageBanner
+        page="services"
+        label="Services"
+        title="Four things I do, and how a project runs."
+        note="Projects typically run two to twelve weeks. Retainers are available for ongoing development work."
+      />
+
+      <div className="mx-auto max-w-7xl px-6 md:px-10">
 
       {/* ---------------- service cards ---------------- */}
       <section className="mt-14 grid gap-6 sm:grid-cols-2 md:mt-20 md:gap-8">
@@ -168,6 +156,7 @@ export default function ServicesPage({
           Book a discovery call
           <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
         </button>
+        </div>
       </div>
     </main>
   );

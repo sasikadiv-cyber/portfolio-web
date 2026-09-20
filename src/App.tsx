@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import AboutPage from "./components/AboutPage";
 import ContactPage from "./components/ContactPage";
+import Cursor from "./components/Cursor";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import Nav from "./components/Nav";
@@ -193,6 +194,7 @@ export default function App() {
 
   return (
     <div className="app-bg min-h-screen bg-paper">
+      <Cursor />
       {!ready && <Preloader onDone={() => setReady(true)} />}
 
       {/* page transition curtain */}

@@ -1,4 +1,4 @@
-import { PROJECTS } from "../data/site";
+import { ARCHIVE, PROJECTS } from "../data/site";
 import SectionHeader from "./SectionHeader";
 
 export default function Work() {
@@ -27,10 +27,10 @@ export default function Work() {
                 alt={p.title}
                 loading="lazy"
                 decoding="async"
-                className="img-soft aspect-[4/3] w-full object-cover"
+                className="project-thumb img-soft aspect-[4/3] w-full object-cover"
               />
               {/* case study hover overlay */}
-              <span className="absolute inset-0 z-[2] flex items-center justify-center bg-paper/45 opacity-0 backdrop-blur-[2px] transition-opacity duration-500 group-hover:opacity-100 max-md:opacity-100 max-md:items-end max-md:justify-end max-md:bg-transparent max-md:p-3 max-md:backdrop-blur-0">
+              <span className="project-overlay absolute inset-0 z-[2] flex items-center justify-center bg-paper/45 opacity-0 backdrop-blur-[2px] transition-opacity duration-500 group-hover:opacity-100 max-md:opacity-100 max-md:items-end max-md:justify-end max-md:bg-transparent max-md:p-3 max-md:backdrop-blur-0">
                 <span className="case-chip flex items-center gap-2.5 rounded-full border border-accent/60 bg-paper/90 px-4 py-2.5 text-[13px] text-ink transition-transform duration-500 md:scale-95 md:group-hover:scale-100 max-md:px-3 max-md:py-2">
                   <svg
                     viewBox="0 0 24 24"
@@ -116,8 +116,8 @@ export default function Work() {
         <div>
           <p className="label mb-3">Full archive</p>
           <p className="max-w-md text-[15px] leading-[1.7] text-ink-2">
-            These four are the recent ones — the archive holds all nine
-            projects from 2020 to 2026, with notes on each.
+            The archive holds all {ARCHIVE.length} projects with notes on each
+            — every one designed, built and shipped end to end.
           </p>
         </div>
         <a

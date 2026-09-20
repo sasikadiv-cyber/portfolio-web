@@ -10,6 +10,34 @@ export const PROFILE = {
     "I design and build for the web — interfaces that look considered, and code that keeps them fast and accessible. Alongside development I do brand and graphic design, so the whole presence of a business feels like one idea.",
 };
 
+/* ---------- cinematic imagery ----------
+   HERO_IMAGE drives the home hero; each inner page has its own atmosphere. */
+export const HERO_IMAGE =
+  "https://images.pexels.com/photos/28901526/pexels-photo-28901526.jpeg?auto=compress&cs=tinysrgb&w=1920";
+
+/** cinematic banner on the inner pages — flip enabled to false to remove it */
+export const BANNER = {
+  enabled: true,
+  images: {
+    work: {
+      src: "https://images.pexels.com/photos/30820149/pexels-photo-30820149.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      position: "center 52%",
+    },
+    about: {
+      src: "https://images.pexels.com/photos/13316185/pexels-photo-13316185.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      position: "center 48%",
+    },
+    services: {
+      src: "https://images.pexels.com/photos/17279851/pexels-photo-17279851.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      position: "center 54%",
+    },
+    contact: {
+      src: "https://images.pexels.com/photos/8715123/pexels-photo-8715123.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      position: "center 50%",
+    },
+  },
+};
+
 export const NAV = [
   { id: "work", label: "Work" },
   { id: "about", label: "About" },
@@ -31,58 +59,76 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   {
-    id: "aurum",
-    title: "Aurum",
-    client: "Aurum Parfums",
-    category: "Graphic design & e-commerce build",
-    year: "2025",
+    id: "thomiansmedia",
+    title: "Thomians' Media",
+    client: "Thomians Media Unit",
+    category: "Website — live platform",
+    year: "2026",
     description:
-      "A complete identity and online store for a fragrance house — designed in Figma and built as a fast Shopify storefront.",
-    outcome: "+164% online revenue in the first two quarters",
-    tags: ["Identity", "Shopify", "Front-end"],
-    image:
-      "https://images.pexels.com/photos/11417443/pexels-photo-11417443.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1400",
+      "The home of a school broadcasting unit — live match coverage, real-time scores and an archive of years of footage, all run from one CMS.",
+    outcome: "Live in production, updated weekly by the students",
+    tags: ["Live broadcast", "Realtime scores", "CMS"],
+    image: "https://i.ibb.co/mFCks5Yr/thomiansmedia.webp",
   },
   {
-    id: "vanta",
-    title: "Vanta Pay",
-    client: "Vanta Financial",
-    category: "UI/UX design",
-    year: "2024",
+    id: "nova",
+    title: "Nova",
+    client: "Hobby Project",
+    category: "E-commerce website",
+    year: "2026",
     description:
-      "Product design for a mobile banking app — dense data presented calmly, with every state designed and prototyped before build.",
-    outcome: "Onboarding time reduced by 51%",
-    tags: ["Mobile app", "UX research", "Design system"],
-    image:
-      "https://images.pexels.com/photos/6406691/pexels-photo-6406691.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1400",
+      "A full commerce stack built end to end — storefront, cart, Stripe checkout, buyer accounts, order and stock management, and an admin panel for the team.",
+    outcome: "Storefront to admin, one build",
+    tags: ["Next.js", "Stripe", "Admin panel"],
+    image: "https://i.ibb.co/j92R3dg7/novastorelk.webp",
   },
   {
-    id: "monolith",
-    title: "Monolith",
-    client: "Monolith Architects",
+    id: "photography",
+    title: "Ravin Fernando",
+    client: "Hobby Project",
     category: "Website — design & build",
-    year: "2024",
+    year: "2026",
     description:
-      "A quiet portfolio site for an architecture studio, where the photography carries the page and the interface stays out of the way.",
-    outcome: "Average session time of 4 minutes",
-    tags: ["Web design", "React", "CMS"],
-    image:
-      "https://images.pexels.com/photos/15663488/pexels-photo-15663488.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1400",
-  },
-  {
-    id: "noir",
-    title: "Noir",
-    client: "Noir Cosmetics",
-    category: "Design system",
-    year: "2023",
-    description:
-      "A 240-component library in Figma and code so regional teams could ship consistent work without a designer in every room.",
-    outcome: "Launch cycle shortened from months to days",
-    tags: ["Tokens", "Documentation", "React"],
-    image:
-      "https://images.pexels.com/photos/13186049/pexels-photo-13186049.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1400",
+      "A monograph for a photographer — editorial type, cinematic pacing and full-bleed imagery that gets out of the photograph's way.",
+    outcome: "A gallery that behaves like a printed folio",
+    tags: ["Web design", "React", "Vite"],
+    image: "https://i.ibb.co/33N38fh/photography-site.webp",
   },
 ];
+
+/* ---------- image & layout controls ----------
+   Adjust the case-study media from here — no component edits needed. */
+export const MEDIA = {
+  /** desktop screenshot ratio (width / height) inside the browser frame */
+  desktopRatio: "20 / 10",
+  /** which part of a tall screenshot stays visible — "top" | "center" | "bottom" */
+  desktopAnchor: "top",
+  /** phone screen ratio inside the device frame */
+  mobileRatio: "9 / 19",
+  mobileAnchor: "top",
+  /** phone width (px) shown in the desktop / mobile toggle */
+  mobileWidth: 300,
+  /** the UI/UX hero — desktop shot width as a % of the page */
+  heroDesktopWidth: 80,
+  /** the UI/UX hero — overlapping phone width as a % of the page */
+  heroPhoneWidth: 24,
+  heroPhoneMin: 210,
+  heroPhoneMax: 280,
+  /** phone width (px) below the desktop shot on small screens */
+  heroPhoneMobile: 250,
+  /** gallery image height (px) from the lg breakpoint up */
+  galleryHeight: 380,
+  /** custom cursor — set enabled to false to bring the normal arrow back */
+  cursor: {
+    enabled: true,
+    /** centre dot size (px) */
+    dot: 8,
+    /** ring size (px) while idling */
+    ring: 34,
+    /** ring size (px) while hovering a link or button */
+    ringHover: 58,
+  },
+};
 
 export const SERVICES = [
   {
@@ -190,8 +236,8 @@ export const TESTIMONIALS = [
 ];
 
 export const SOCIALS = [
-  { label: "LinkedIn", href: "https://linkedin.com" },
-  { label: "GitHub", href: "https://github.com" },
+  /*{ label: "LinkedIn", href: "https://linkedin.com" },*/
+  { label: "GitHub", href: "https://github.com/sasikadiv-cyber" },
   { label: "Facebook", href: "https://facebook.com" },
   { label: "Instagram", href: "https://instagram.com" },
 ];
@@ -218,121 +264,43 @@ export type ArchiveItem = {
 
 export const ARCHIVE: ArchiveItem[] = [
   {
-    id: "thomians",
+    id: "thomiansmedia",
     n: "01",
-    title: "Thomians Media",
+    title: "Thomians' Media",
     client: "Thomians Media Unit",
     category: "Website",
     year: "2026",
     blurb:
-      "A live media platform for a school's broadcasting unit — event coverage, videos and announcements, designed and built end to end, and running in production.",
+      "A complete website for a live broadcasting platform and real-time score updates with a rich CMS",
     tags: ["Web design", "Front-end", "Live platform"],
-    image: "/images/thomian.webp",
+    image: "https://i.ibb.co/mFCks5Yr/thomiansmedia.webp",
     liveUrl: "https://live.thomiansmedia.us/",
   },
   {
-    id: "aurum",
+    id: "nova",
     n: "02",
-    title: "Aurum",
-    client: "Aurum Parfums",
-    category: "Graphic Design",
-    year: "2025",
+    title: "Nova",
+    client: "Hobby Project",
+    category: "Website",
+    year: "2026",
     blurb:
-      "A complete identity and storefront for a fragrance house — the logotype, the packaging line and the Shopify build it all lives on.",
-    tags: ["Identity", "Shopify", "Front-end"],
-    image:
-      "https://images.pexels.com/photos/11417443/pexels-photo-11417443.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1000&w=1400",
+      "A digital flagship rooted in quiet luxury — editorial typography, restrained interactions and an end-to-end commerce experience.",
+    tags: ["TypeScript", "Next.js", "Front-end", "Back-end"],
+    image: "https://i.ibb.co/j92R3dg7/novastorelk.webp",
+    liveUrl: "https://novastorelk.vercel.app/",
   },
   {
-    id: "vanta",
+    id: "photography",
     n: "03",
-    title: "Vanta Pay",
-    client: "Vanta Financial",
-    category: "UI/UX",
-    year: "2024",
-    blurb:
-      "Product design for a mobile banking app — research, flows and a calm interface language for dense financial data.",
-    tags: ["Mobile app", "UX research", "Design system"],
-    image:
-      "https://images.pexels.com/photos/6406691/pexels-photo-6406691.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1000&w=1400",
-  },
-  {
-    id: "monolith",
-    n: "04",
-    title: "Monolith",
-    client: "Monolith Architects",
+    title: "Ravin Fernando",
+    client: "Hobby Project",
     category: "Website",
-    year: "2024",
+    year: "2026",
     blurb:
-      "A quiet portfolio site where the architecture carries the page. Designed in sections, built in React, edited through a CMS.",
-    tags: ["Web design", "React", "CMS"],
-    image:
-      "https://images.pexels.com/photos/15663488/pexels-photo-15663488.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1000&w=1400",
-  },
-  {
-    id: "noir",
-    n: "05",
-    title: "Noir",
-    client: "Noir Cosmetics",
-    category: "UI/UX",
-    year: "2023",
-    blurb:
-      "A token-driven design system in Figma and code so nine regional teams could ship consistent work without drift.",
-    tags: ["Tokens", "Documentation", "React"],
-    image:
-      "https://images.pexels.com/photos/13186049/pexels-photo-13186049.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1000&w=1400",
-  },
-  {
-    id: "ascent",
-    n: "06",
-    title: "Ascent",
-    client: "Ascent Property",
-    category: "Website",
-    year: "2023",
-    blurb:
-      "From naming to a live listings platform in seven months — identity, search experience and a front-end that loads under a second on 3G.",
-    tags: ["Naming", "Platform", "Front-end"],
-    image:
-      "https://images.pexels.com/photos/5091783/pexels-photo-5091783.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1000&w=1400",
-  },
-  {
-    id: "horo",
-    n: "07",
-    title: "Horo",
-    client: "Horo Timepieces",
-    category: "Graphic Design",
-    year: "2022",
-    blurb:
-      "An identity drawn from the geometry of the escapement wheel — a bespoke serif, campaign art direction and retail print.",
-    tags: ["Type design", "Art direction", "Print"],
-    image:
-      "https://images.pexels.com/photos/36475261/pexels-photo-36475261.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1000&w=1400",
-  },
-  {
-    id: "meridian",
-    n: "08",
-    title: "Meridian",
-    client: "Meridian Journal",
-    category: "Website",
-    year: "2021",
-    blurb:
-      "An editorial reading experience for long-form essays — typographic rhythm, footnotes and a paywall that doesn't insult the reader.",
-    tags: ["Editorial", "Typography", "Accessibility"],
-    image:
-      "https://images.pexels.com/photos/38673756/pexels-photo-38673756.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1000&w=1400",
-  },
-  {
-    id: "obsidian",
-    n: "09",
-    title: "Obsidian",
-    client: "Obsidian Studio",
-    category: "Graphic Design",
-    year: "2020",
-    blurb:
-      "Naming and identity for a photography studio — a strict wordmark, a monochrome paper suite and one usable colour.",
-    tags: ["Naming", "Logotype", "Guidelines"],
-    image:
-      "https://images.pexels.com/photos/9202860/pexels-photo-9202860.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1000&w=1400",
+      "A visual monograph drawn from geometry, shadow and silence — editorial serif typography, cinematic pacing and an archival photography showcase.",
+    tags: ["Cinematic", "React", "Vite", "Accessibility"],
+    image: "https://i.ibb.co/33N38fh/photography-site.webp",
+    liveUrl: "https://hobbyphotographysite.vercel.app/",
   },
 ];
 
@@ -393,108 +361,190 @@ export type ProjectDetail = {
 
 export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
   /* ============================== WEBSITES ============================== */
-  thomians: {
-    id: "thomians",
+  thomiansmedia: {
+    id: "thomiansmedia",
     overview: [
       "The Thomians Media Unit needed a permanent home for everything it produced — match-day coverage, event recaps, announcements and an archive of years of footage. What existed was scattered across social platforms with no identity of its own.",
       "I designed and built the platform end to end: a bold editorial layout that puts the latest coverage first, a video-first architecture tuned for slow connections, and an admin flow the students can run themselves. It is live in production and updated by the unit every week.",
     ],
     role: "Design & development — end to end",
-    timeline: "3 months · 2026",
+    timeline: "2 months · 2026",
     deliverables: [
       "Brand refresh",
       "Website design",
       "Front-end build",
-      "Video pipeline",
+      "Back-end build",
       "Deployment & handover",
     ],
     stack: [
-      { group: "Framework", items: ["React 19", "Vite"] },
+      { group: "Framework", items: ["React 19", "Next.js"] },
       { group: "Languages", items: ["TypeScript", "HTML", "CSS"] },
       { group: "Styling", items: ["Tailwind CSS", "Framer Motion"] },
-      { group: "Platform", items: ["Cloudflare", "Nginx"] },
+      { group: "Platform", items: ["Cloudflare", "Supabase", "Firebase", "Turso"] },
     ],
-    scores: { performance: 94, accessibility: 100, bestPractices: 100, seo: 100 },
+    scores: { performance: 96, accessibility: 100, bestPractices: 92, seo: 100 },
     screens: {
-      desktop: "/images/thomian.webp",
-      mobile: px(15075135, 760, 1560),
+      desktop: "https://i.ibb.co/v4sx1knF/thomiansmedia2.webp",
+      mobile: "https://i.ibb.co/cS4V0Pb1/thomiansmediamobile.webp",
       url: "live.thomiansmedia.us",
     },
     gallery: [
-      { src: px(13710029, 1400, 1000), caption: "Coverage rigs before kickoff" },
-      { src: px(19623302, 1200, 1500), caption: "Field unit on assignment" },
-      { src: px(33499834, 1400, 1000), caption: "Outdoor event coverage crew" },
-      { src: px(15075135, 1200, 1500), caption: "Night coverage — bokeh test" },
+      {
+        src: "https://i.ibb.co/mn6QcnB/thomiangallart1.webp",
+        caption: "Live scores, updated mid-over",
+      },
+      {
+        src: "https://i.ibb.co/GvkX7hn8/thomiangallart2.webp",
+        caption: "The gallery — every event, one archive",
+      },
+      {
+        src: "https://i.ibb.co/VYCTBGm1/thomiangallart3.webp",
+        caption: "Match-day weather, at a glance",
+      },
+      {
+        src: "https://i.ibb.co/bR7bSZ37/thomiangallart4.webp",
+        caption: "Fan voting, with live results",
+      },
+      {
+        src: "https://i.ibb.co/5xv6F3ZT/thomiangallart6.webp",
+        caption: "One dashboard, everything under control",
+      },
+      {
+        src: "https://i.ibb.co/zKXbw8W/thomiangallart7.webp",
+        caption: "Traffic insights on the free tier",
+      },
+      {
+        src: "https://i.ibb.co/5gppPnyx/thomiansmedia5.webp",
+        caption: "Fan cards, made in the browser",
+      },
     ],
   },
-  monolith: {
-    id: "monolith",
+  nova: {
+    id: "nova",
     overview: [
-      "Monolith's work is quiet and heavy — board-formed concrete, long shadows. The site had to behave the same way: photography that fills the page and an interface that disappears.",
-      "Built in Next.js with a Sanity studio the architects update themselves, the site strips navigation down to a single index. Images ship as next-gen formats with per-breakpoint crops — it loads like a document, not an app.",
+      "Nova started as a question: how much of a real store can one person design, build and ship alone? The answer turned out to be all of it — the storefront, the checkout, the accounts and the back office.",
+      "Everything a running shop needs is here: filterable collections, product pages with variants, buyer accounts, Stripe checkout, order tracking, stock control and an admin panel with team access — all in one Next.js codebase.",
+    ],
+    role: "Design & build — storefront to admin",
+    timeline: "3 weeks · 2026",
+    deliverables: [
+      "Storefront design",
+      "Next.js build",
+      "Stripe checkout",
+      "Buyer accounts",
+      "Order & stock admin",
+      "Team access control",
+    ],
+    stack: [
+      { group: "Framework", items: ["Next.js", "React"] },
+      { group: "Languages", items: ["TypeScript", "CSS", "Tailwind CSS"] },
+      { group: "Payments", items: ["Stripe"] },
+      { group: "Platform", items: ["Vercel", "Supabase", "Resend"] },
+    ],
+    scores: { performance: 76, accessibility: 93, bestPractices: 100, seo: 92 },
+    screens: {
+      desktop: "https://i.ibb.co/WXFkkdv/home.webp",
+      mobile: "https://i.ibb.co/6JwYt2nm/mobile.webp",
+      url: "novastorelk.vercel.app",
+    },
+    gallery: [
+      {
+        src: "https://i.ibb.co/b5FLKvpH/collections.webp",
+        caption: "Collections, filtered live",
+      },
+      {
+        src: "https://i.ibb.co/jkf8mZXK/product.webp",
+        caption: "Product pages with every detail",
+      },
+      {
+        src: "https://i.ibb.co/LdNDCjnw/clients.webp",
+        caption: "Buyer accounts, full control",
+      },
+      {
+        src: "https://i.ibb.co/XfpRGg74/order-tracking.webp",
+        caption: "Order tracking, cart to door",
+      },
+      {
+        src: "https://i.ibb.co/y3qWrFS/payment.webp",
+        caption: "Stripe checkout, secure by default",
+      },
+      {
+        src: "https://i.ibb.co/F4f5vZcD/order-management.webp",
+        caption: "Order management, built to configure",
+      },
+      {
+        src: "https://i.ibb.co/M5hDrW71/stock-management.webp",
+        caption: "Stock management that keeps count",
+      },
+      {
+        src: "https://i.ibb.co/Ngm6YDvq/product-add.webp",
+        caption: "Add or retire products in seconds",
+      },
+      {
+        src: "https://i.ibb.co/nNq73XJw/product-add-3.webp",
+        caption: "Variants, colours and sizes",
+      },
+      {
+        src: "https://i.ibb.co/rRvzDfhN/product-add-2.webp",
+        caption: "Product entry, without the friction",
+      },
+      {
+        src: "https://i.ibb.co/Pv9vjgsM/access-management.webp",
+        caption: "Team access, role by role",
+      },
+    ],
+  },
+  photography: {
+    id: "photography",
+    overview: [
+      "A photographer's archive deserved better than a grid of thumbnails. The brief was a monograph — a site that reads like a printed folio, where each series gets its own pace and its own room.",
+      "Built with Vite and React in four days: editorial serif type, full-bleed banners, cards that respond to the cursor, and a contact page that stays out of the way of the work.",
     ],
     role: "Design & build",
-    timeline: "4 months · 2024",
+    timeline: "4 days · 2026",
     deliverables: [
       "Art direction",
       "Website design",
-      "Next.js build",
-      "CMS modelling",
-      "Launch & training",
+      "React build",
+      "Series & banner system",
+      "Contact flow",
     ],
     stack: [
-      { group: "Framework", items: ["Next.js", "React"] },
+      { group: "Framework", items: ["Vite", "React"] },
       { group: "Languages", items: ["TypeScript", "CSS"] },
-      { group: "CMS", items: ["Sanity"] },
-      { group: "Platform", items: ["Vercel", "Vercel Image CDN"] },
+      { group: "Motion", items: ["CSS keyframes", "Scroll reveals"] },
+      { group: "Platform", items: ["Vercel", "Vercel Analytics"] },
     ],
-    scores: { performance: 96, accessibility: 100, bestPractices: 100, seo: 100 },
+    scores: { performance: 98, accessibility: 100, bestPractices: 100, seo: 100 },
     screens: {
-      desktop: px(15663488, 1440, 1000),
-      mobile: px(28506788, 760, 1560),
-      url: "monolith.archi",
+      desktop: "https://i.ibb.co/4w0Lyj7Z/Hero.webp",
+      mobile: "https://i.ibb.co/q37XJWHY/mobile-1.webp",
+      url: "hobbyphotographysite.vercel.app",
     },
     gallery: [
-      { src: px(9473066, 1400, 1000), caption: "Facade rhythm — case photography" },
-      { src: px(28506788, 1200, 1500), caption: "White volume against sky" },
-      { src: px(35251110, 1400, 1000), caption: "Madrid structure, study 03" },
-      { src: px(31735052, 1200, 1500), caption: "Geometric detail, exterior" },
+      {
+        src: "https://i.ibb.co/tpM0G1dB/Services.webp",
+        caption: "Services, set in editorial type",
+      },
+      {
+        src: "https://i.ibb.co/mCd51wkz/Dynamic-Card.webp",
+        caption: "Cards that respond to the cursor",
+      },
+      {
+        src: "https://i.ibb.co/0713D9z/Contact.webp",
+        caption: "Contact, quietly inviting",
+      },
+      {
+        src: "https://i.ibb.co/s9F9RCP8/About2.webp",
+        caption: "About — the story in first person",
+      },
+      {
+        src: "https://i.ibb.co/Q7Qm4t0X/About.webp",
+        caption: "Banners, full bleed",
+      },
     ],
   },
-  ascent: {
-    id: "ascent",
-    overview: [
-      "Ascent started as a name on a whiteboard and ended as a live property platform — identity, search experience and front-end build in a single engagement.",
-      "The brief was speed: under a second on hotel wifi. Static-first pages, edge-cached listings and an Algolia index kept search feeling instant even on 3G.",
-    ],
-    role: "Naming, identity, design & build",
-    timeline: "7 months · 2023",
-    deliverables: [
-      "Naming & identity",
-      "Listings platform",
-      "Search experience",
-      "Front-end build",
-      "Analytics setup",
-    ],
-    stack: [
-      { group: "Framework", items: ["Next.js", "React"] },
-      { group: "Languages", items: ["TypeScript", "CSS"] },
-      { group: "Services", items: ["Algolia", "Mapbox", "Vercel Analytics"] },
-    ],
-    scores: { performance: 97, accessibility: 98, bestPractices: 100, seo: 100 },
-    screens: {
-      desktop: px(5091783, 1440, 1000),
-      mobile: px(7031604, 760, 1560),
-      url: "ascentproperty.com",
-    },
-    gallery: [
-      { src: px(7031604, 1400, 1000), caption: "Villa listing — hero photography" },
-      { src: px(7031600, 1200, 1500), caption: "Courtyard set, summer campaign" },
-      { src: px(8134821, 1400, 1000), caption: "Two-story residence exterior" },
-      { src: px(7587470, 1200, 1500), caption: "Brick facade, low angle" },
-    ],
-  },
-  meridian: {
+ /*meridian: {
     id: "meridian",
     overview: [
       "Meridian publishes four-thousand-word essays. The reading experience had to hold attention for twenty minutes without a single trick.",
@@ -526,10 +576,10 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
       { src: px(4467632, 1400, 1000), caption: "Reading habits research" },
       { src: px(4792089, 1200, 1500), caption: "Slow morning, long read" },
     ],
-  },
+  },*/
 
   /* ============================ GRAPHIC DESIGN ============================ */
-  aurum: {
+  /*aurum: {
     id: "aurum",
     overview: [
       "Aurum launched with a single fragrance and a napkin sketch. The brief was a house that could sit beside the old French maisons — without pretending to be one.",
@@ -580,8 +630,8 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
       { src: px(36834269, 1400, 1000), caption: "Wild Black — limited edition" },
       { src: px(36779951, 1200, 1500), caption: "Bottle detail, late light" },
     ],
-  },
-  horo: {
+  },*/
+  /*horo: {
     id: "horo",
     overview: [
       "A watchmaker that machines its own escapements wanted an identity drawn from the same geometry as its movements — nothing decorative, everything earned.",
@@ -684,10 +734,10 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
       { src: px(6598819, 1400, 1000), caption: "Tools of the bench" },
       { src: px(989863, 1200, 1500), caption: "Helios optics study" },
     ],
-  },
+  },*/
 
   /* ================================ UI/UX ================================ */
-  vanta: {
+ /* vanta: {
     id: "vanta",
     overview: [
       "Vanta's banking app carried institutional density — multi-currency accounts, statements and approvals — squeezed onto consumer screens. Users were getting lost before their first transfer.",
@@ -800,5 +850,5 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
       { src: px(6167445, 1400, 1000), caption: "Jar system with natural props" },
       { src: px(6167444, 1200, 1500), caption: "Marble surface arrangements" },
     ],
-  },
+  },*/
 };

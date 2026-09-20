@@ -15,7 +15,7 @@ import {
   Type,
   X,
 } from "lucide-react";
-import { ARCHIVE, PROJECT_DETAILS } from "../data/site";
+import { ARCHIVE, MEDIA, PROJECT_DETAILS } from "../data/site";
 import { useReveal } from "../lib/hooks";
 
 type IconCmp = React.ComponentType<{ className?: string }>;
@@ -250,11 +250,14 @@ function DesktopShot({
   url,
   alt,
   eager = false,
+  ratio,
 }: {
   src: string;
   url: string;
   alt: string;
   eager?: boolean;
+  /** per-project override from site.ts, falling back to MEDIA.desktopRatio */
+  ratio?: string;
 }) {
   return (
     <div className="img-frame rounded-[18px] overflow-hidden border border-line bg-paper-2">
@@ -265,7 +268,11 @@ function DesktopShot({
         loading={eager ? "eager" : "lazy"}
         decoding="async"
         {...(eager ? { fetchPriority: "high" as const } : {})}
-        className="aspect-[16/10] w-full object-cover object-top"
+        style={{
+          aspectRatio: ratio ?? MEDIA.desktopRatio,
+          objectPosition: MEDIA.desktopAnchor,
+        }}
+        className="w-full object-cover"
       />
     </div>
   );
@@ -291,7 +298,11 @@ function MobileShot({
             alt={alt}
             loading={eager ? "eager" : "lazy"}
             decoding="async"
-            className="aspect-[9/19] w-full object-cover object-top"
+            style={{
+              aspectRatio: MEDIA.mobileRatio,
+              objectPosition: MEDIA.mobileAnchor,
+            }}
+            className="w-full object-cover"
           />
         </div>
         {/* home indicator */}
@@ -469,8 +480,18 @@ export default function ProjectPage({
 
         {kind === "uiux" && (
           /* desktop behind, phone overlapping — the classic product shot */
-          <div data-reveal className="rv-media relative md:pb-[9%]">
-            <div className="md:w-[80%]">
+          <div
+            data-reveal
+            className="rv-media relative md:pb-[9%]"
+            style={{
+              ["--hero-dw" as string]: `${MEDIA.heroDesktopWidth}%`,
+              ["--hero-pw" as string]: `${MEDIA.heroPhoneWidth}%`,
+              ["--hero-pmin" as string]: `${MEDIA.heroPhoneMin}px`,
+              ["--hero-pmax" as string]: `${MEDIA.heroPhoneMax}px`,
+              ["--hero-pmob" as string]: `${MEDIA.heroPhoneMobile}px`,
+            }}
+          >
+            <div className="md:w-[var(--hero-dw)]">
               <DesktopShot
                 eager
                 src={detail.screens.desktop}
@@ -478,7 +499,7 @@ export default function ProjectPage({
                 alt={`${item.title} — product on desktop`}
               />
             </div>
-            <div className="max-md:mx-auto max-md:mt-8 max-md:max-w-[250px] md:absolute md:bottom-0 md:right-[2%] md:w-[24%] md:min-w-[210px] md:max-w-[280px]">
+            <div className="max-md:mx-auto max-md:mt-8 max-md:max-w-[var(--hero-pmob)] md:absolute md:bottom-0 md:right-[2%] md:w-[var(--hero-pw)] md:min-w-[var(--hero-pmin)] md:max-w-[var(--hero-pmax)]">
               <MobileShot
                 eager
                 src={detail.screens.mobile}
@@ -497,7 +518,11 @@ export default function ProjectPage({
                 loading="eager"
                 decoding="async"
                 fetchPriority="high"
-                className="aspect-[16/10] w-full object-cover"
+                style={{
+                  aspectRatio: MEDIA.desktopRatio,
+                  objectPosition: MEDIA.desktopAnchor,
+                }}
+                className="w-full object-cover"
               />
             </div>
             <figcaption className="mt-4 flex items-center justify-between text-[12.5px] text-mute">

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { PROFILE, SOCIALS } from "../data/site";
 import { useReveal } from "../lib/hooks";
+import PageBanner from "./PageBanner";
 
 const BUDGETS = [
   "Under $2,000",
@@ -68,28 +69,16 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="mx-auto max-w-7xl px-6 pb-20 md:px-10 md:pb-28">
-      {/* ---------------- header ---------------- */}
-      <header className="pt-20 md:pt-28">
-        <p data-reveal className="label mb-6">
-          Contact
-        </p>
-        <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between md:gap-16">
-          <h1
-            className="t-mask max-w-2xl text-[clamp(2rem,5vw,3.4rem)] leading-[1.1] font-medium text-ink"
-            style={{ ["--rv-delay" as string]: "60ms" }}
-          >
-            <span>Tell me what you're working on.</span>
-          </h1>
-          <p
-            data-reveal
-            style={{ ["--rv-delay" as string]: "120ms" }}
-            className="max-w-sm text-[14.5px] leading-[1.7] text-mute"
-          >
-            I reply to every enquiry within two working days.
-          </p>
-        </div>
-      </header>
+    <main className="pb-20 md:pb-28">
+      {/* ---------------- cinematic header ---------------- */}
+      <PageBanner
+        page="contact"
+        label="Contact"
+        title="Tell me what you're working on."
+        note="I reply to every enquiry within two working days."
+      />
+
+      <div className="mx-auto max-w-7xl px-6 md:px-10">
 
       <div className="mt-14 grid gap-x-12 gap-y-12 md:mt-20 md:grid-cols-12">
         {/* ---------------- details ---------------- */}
@@ -298,6 +287,7 @@ export default function ContactPage() {
             </form>
           )}
         </div>
+      </div>
       </div>
     </main>
   );

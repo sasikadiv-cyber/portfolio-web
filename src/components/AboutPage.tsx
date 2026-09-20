@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { CLIENTS, EXPERIENCE, PORTRAIT, PROFILE, STATS } from "../data/site";
 import { useReveal } from "../lib/hooks";
+import PageBanner from "./PageBanner";
 
 /** Counts up to a value like "12" or "80+" when scrolled into view. */
 function StatValue({ value }: { value: string }) {
@@ -52,19 +53,15 @@ export default function AboutPage({ onContact }: { onContact: () => void }) {
   useReveal(true);
 
   return (
-    <main className="mx-auto max-w-7xl px-6 pb-20 md:px-10 md:pb-28">
-      {/* ---------------- header ---------------- */}
-      <header className="pt-20 md:pt-28">
-        <p data-reveal className="label mb-6">
-          About
-        </p>
-        <h1
-          className="t-mask max-w-2xl text-[clamp(2rem,5vw,3.4rem)] leading-[1.1] font-medium text-ink"
-          style={{ ["--rv-delay" as string]: "60ms" }}
-        >
-          <span>An independent practice, built on clarity.</span>
-        </h1>
-      </header>
+    <main className="pb-20 md:pb-28">
+      {/* ---------------- cinematic header ---------------- */}
+      <PageBanner
+        page="about"
+        label="About"
+        title="An independent practice, built on clarity."
+      />
+
+      <div className="mx-auto max-w-7xl px-6 md:px-10">
 
       {/* ---------------- portrait + story ---------------- */}
       <section className="mt-14 grid gap-y-12 border-b border-line pb-16 md:mt-20 md:grid-cols-12 md:gap-x-12 md:pb-24">
@@ -210,6 +207,7 @@ export default function AboutPage({ onContact }: { onContact: () => void }) {
           Start a conversation
           <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
         </button>
+        </div>
       </div>
     </main>
   );
