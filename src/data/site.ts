@@ -836,7 +836,7 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
         value: 6,
         suffix: "×",
         label: "Faster launch cycle",
-        note: "from months of drift to days of assembly",
+        note: "from months of drift to day of assembly",
       },
     ],
     screens: {
