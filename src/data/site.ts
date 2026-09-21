@@ -13,26 +13,26 @@ export const PROFILE = {
 /* ---------- cinematic imagery ----------
    HERO_IMAGE drives the home hero; each inner page has its own atmosphere. */
 export const HERO_IMAGE =
-  "https://images.pexels.com/photos/30767251/pexels-photo-30767251.jpeg?auto=compress&cs=tinysrgb&w=1920";
+  "https://images.pexels.com/photos/28901526/pexels-photo-28901526.jpeg?auto=compress&cs=tinysrgb&w=1920";
 
 /** cinematic banner on the inner pages — flip enabled to false to remove it */
 export const BANNER = {
   enabled: true,
   images: {
     work: {
-      src: "https://images.pexels.com/photos/30690786/pexels-photo-30690786.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      src: "https://images.pexels.com/photos/30820149/pexels-photo-30820149.jpeg?auto=compress&cs=tinysrgb&w=1600",
       position: "center 52%",
     },
     about: {
-      src: "https://images.pexels.com/photos/8369247/pexels-photo-8369247.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      src: "https://images.pexels.com/photos/31103742/pexels-photo-31103742.jpeg?auto=compress&cs=tinysrgb&w=1600",
       position: "center 48%",
     },
     services: {
-      src: "https://images.pexels.com/photos/34212896/pexels-photo-34212896.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      src: "https://images.pexels.com/photos/17279851/pexels-photo-17279851.jpeg?auto=compress&cs=tinysrgb&w=1600",
       position: "center 54%",
     },
     contact: {
-      src: "https://images.pexels.com/photos/6170654/pexels-photo-6170654.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      src: "https://images.pexels.com/photos/8715123/pexels-photo-8715123.jpeg?auto=compress&cs=tinysrgb&w=1600",
       position: "center 50%",
     },
   },
