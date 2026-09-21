@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { HERO_IMAGE, PROFILE } from "../data/site";
+import { HERO_IMAGE, MEDIA_VERSION, PROFILE } from "../data/site";
 import { useClock } from "../lib/hooks";
 
 const TITLE =
@@ -75,7 +75,9 @@ export default function Hero() {
         aria-hidden
       >
         <img
-          src={HERO_IMAGE}
+          src={`${HERO_IMAGE}${HERO_IMAGE.includes("?") ? "&" : "?"}mv=${MEDIA_VERSION}`}
+          srcSet={`${HERO_IMAGE.replace("w=1920", "w=960")} 960w, ${HERO_IMAGE.replace("w=1920", "w=1440")} 1440w, ${HERO_IMAGE} 1920w`}
+          sizes="100vw"
           alt=""
           fetchPriority="high"
           decoding="async"

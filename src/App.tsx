@@ -11,7 +11,7 @@ import ServicesPage from "./components/ServicesPage";
 import Testimonials from "./components/Testimonials";
 import Work from "./components/Work";
 import WorkPage from "./components/WorkPage";
-import { ARCHIVE } from "./data/site";
+import { ARCHIVE, HERO_IMAGE, PROJECT_DETAILS } from "./data/site";
 import { useReveal } from "./lib/hooks";
 import { destroyLenis, initLenis, smoothTo } from "./lib/lenis";
 
@@ -41,6 +41,40 @@ const COVER_MS = 720;
 /* the cinematic preloader plays once per browser session — a reload in the
    same session skips it, a fresh session (new tab / browser restart) sees it */
 const PRELOADER_KEY = "preloader-seen";
+
+const prefetchPool = new Set<HTMLImageElement>();
+let prefetchStarted = false;
+
+/* Warms only the current archive's likely next images. Old/unlisted case
+   studies are deliberately excluded to protect bandwidth and mobile data. */
+const prefetchWorkMedia = () => {
+  if (prefetchStarted) return;
+  prefetchStarted = true;
+  const urls = new Set<string>();
+  /* Re-requesting the already-visible hero is normally an HTTP-cache hit;
+     it lets the Service Worker persist it in Cache Storage for later visits. */
+  urls.add(HERO_IMAGE);
+  ARCHIVE.forEach((p) => {
+    urls.add(p.image);
+    const d = PROJECT_DETAILS[p.id];
+    if (!d) return;
+    urls.add(d.screens.desktop);
+    urls.add(d.screens.mobile);
+    if (d.gallery[0]) urls.add(d.gallery[0].src);
+  });
+
+  urls.forEach((url) => {
+    if (!url) return;
+    const img = new window.Image();
+    img.decoding = "async";
+    img.fetchPriority = "low";
+    prefetchPool.add(img);
+    const release = () => prefetchPool.delete(img);
+    img.onload = release;
+    img.onerror = release;
+    img.src = url;
+  });
+};
 
 const preloaderSeen = () => {
   try {
@@ -84,11 +118,62 @@ export default function App() {
     }
   }, [ready]);
 
+  /* Run the warm-up only while the browser is idle, and never on data-saver
+     or slow 2G connections. The Service Worker stores these responses in its
+     persistent cache for later visits. */
+  useEffect(() => {
+    if (!ready || route !== "home") return;
+    const connection = (
+      navigator as Navigator & {
+        connection?: { saveData?: boolean; effectiveType?: string };
+      }
+    ).connection;
+    if (
+      connection?.saveData ||
+      connection?.effectiveType?.toLowerCase().includes("2g")
+    )
+      return;
+
+    const idleWindow = window as Window & {
+      requestIdleCallback?: (
+        callback: () => void,
+        options?: { timeout: number },
+      ) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+    const idleId = idleWindow.requestIdleCallback?.(prefetchWorkMedia, {
+      timeout: 4000,
+    });
+    if (idleId !== undefined) {
+      return () => idleWindow.cancelIdleCallback?.(idleId);
+    }
+
+    const timeoutId = globalThis.setTimeout(prefetchWorkMedia, 2500);
+    return () => globalThis.clearTimeout(timeoutId);
+  }, [ready, route]);
+
   /* lock scroll during load + transitions */
   useEffect(() => {
     document.body.style.overflow =
       !ready || phase !== "idle" ? "hidden" : "";
   }, [ready, phase]);
+
+  /* the hero's ken-burns drift is an infinite animation — user-scrolling
+     users never watch it. Pause it once the hero leaves the viewport so
+     the compositor only pays for motion that's actually visible. */
+  useEffect(() => {
+    const el = document.getElementById("top");
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.some((e) => e.isIntersecting);
+        el.classList.toggle("hero-idle", !visible);
+      },
+      { threshold: 0.02 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [page]);
 
   /* track hash */
   useEffect(() => {
@@ -195,7 +280,9 @@ export default function App() {
   return (
     <div className="app-bg min-h-screen bg-paper">
       <Cursor />
-      {!ready && <Preloader onDone={() => setReady(true)} />}
+      {!ready && (
+        <Preloader onDone={() => setReady(true)} />
+      )}
 
       {/* page transition curtain */}
       <div

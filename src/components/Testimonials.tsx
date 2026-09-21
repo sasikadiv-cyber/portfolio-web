@@ -38,7 +38,7 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="mx-auto max-w-7xl scroll-mt-20 border-t border-line px-6 py-20 md:px-10 md:py-32"
+      className="render-lazy mx-auto max-w-7xl scroll-mt-20 border-t border-line px-6 py-20 md:px-10 md:py-32"
     >
       <div>
         <p data-reveal className="label mb-10">

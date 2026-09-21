@@ -44,6 +44,8 @@ export default function PageBanner({
       <div className="absolute inset-0 z-0" aria-hidden>
         <img
           src={media.src}
+          srcSet={`${media.src.replace("w=1600", "w=900")} 900w, ${media.src} 1600w`}
+          sizes="100vw"
           alt=""
           loading="eager"
           decoding="async"

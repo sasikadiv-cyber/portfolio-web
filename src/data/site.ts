@@ -13,26 +13,26 @@ export const PROFILE = {
 /* ---------- cinematic imagery ----------
    HERO_IMAGE drives the home hero; each inner page has its own atmosphere. */
 export const HERO_IMAGE =
-  "https://images.pexels.com/photos/28901526/pexels-photo-28901526.jpeg?auto=compress&cs=tinysrgb&w=1920";
+  "https://images.pexels.com/photos/30767251/pexels-photo-30767251.jpeg?auto=compress&cs=tinysrgb&w=1920";
 
 /** cinematic banner on the inner pages — flip enabled to false to remove it */
 export const BANNER = {
   enabled: true,
   images: {
     work: {
-      src: "https://images.pexels.com/photos/30820149/pexels-photo-30820149.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      src: "https://images.pexels.com/photos/30690786/pexels-photo-30690786.jpeg?auto=compress&cs=tinysrgb&w=1600",
       position: "center 52%",
     },
     about: {
-      src: "https://images.pexels.com/photos/13316185/pexels-photo-13316185.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      src: "https://images.pexels.com/photos/8369247/pexels-photo-8369247.jpeg?auto=compress&cs=tinysrgb&w=1600",
       position: "center 48%",
     },
     services: {
-      src: "https://images.pexels.com/photos/17279851/pexels-photo-17279851.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      src: "https://images.pexels.com/photos/34212896/pexels-photo-34212896.jpeg?auto=compress&cs=tinysrgb&w=1600",
       position: "center 54%",
     },
     contact: {
-      src: "https://images.pexels.com/photos/8715123/pexels-photo-8715123.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      src: "https://images.pexels.com/photos/6170654/pexels-photo-6170654.jpeg?auto=compress&cs=tinysrgb&w=1600",
       position: "center 50%",
     },
   },
@@ -98,9 +98,13 @@ export const PROJECTS: Project[] = [
 
 /* ---------- image & layout controls ----------
    Adjust the case-study media from here — no component edits needed. */
+
+/** cache-busting token — bump after swapping imagery to force a refresh */
+export const MEDIA_VERSION = "v1";
+
 export const MEDIA = {
   /** desktop screenshot ratio (width / height) inside the browser frame */
-  desktopRatio: "20 / 10",
+  desktopRatio: "16 / 10",
   /** which part of a tall screenshot stays visible — "top" | "center" | "bottom" */
   desktopAnchor: "top",
   /** phone screen ratio inside the device frame */
@@ -118,7 +122,8 @@ export const MEDIA = {
   heroPhoneMobile: 250,
   /** gallery image height (px) from the lg breakpoint up */
   galleryHeight: 380,
-  /** custom cursor — set enabled to false to bring the normal arrow back */
+  /** bump SITE_MEDIA_VERSION after replacing imagery at a stable URL —
+      every visitor's image cache refreshes to the new frame automatically */
   cursor: {
     enabled: true,
     /** centre dot size (px) */
@@ -236,8 +241,8 @@ export const TESTIMONIALS = [
 ];
 
 export const SOCIALS = [
-  /*{ label: "LinkedIn", href: "https://linkedin.com" },*/
-  { label: "GitHub", href: "https://github.com/sasikadiv-cyber" },
+  { label: "LinkedIn", href: "https://linkedin.com" },
+  { label: "GitHub", href: "https://github.com" },
   { label: "Facebook", href: "https://facebook.com" },
   { label: "Instagram", href: "https://instagram.com" },
 ];
@@ -544,7 +549,7 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
       },
     ],
   },
- /*meridian: {
+  meridian: {
     id: "meridian",
     overview: [
       "Meridian publishes four-thousand-word essays. The reading experience had to hold attention for twenty minutes without a single trick.",
@@ -576,10 +581,10 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
       { src: px(4467632, 1400, 1000), caption: "Reading habits research" },
       { src: px(4792089, 1200, 1500), caption: "Slow morning, long read" },
     ],
-  },*/
+  },
 
   /* ============================ GRAPHIC DESIGN ============================ */
-  /*aurum: {
+  aurum: {
     id: "aurum",
     overview: [
       "Aurum launched with a single fragrance and a napkin sketch. The brief was a house that could sit beside the old French maisons — without pretending to be one.",
@@ -630,8 +635,8 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
       { src: px(36834269, 1400, 1000), caption: "Wild Black — limited edition" },
       { src: px(36779951, 1200, 1500), caption: "Bottle detail, late light" },
     ],
-  },*/
-  /*horo: {
+  },
+  horo: {
     id: "horo",
     overview: [
       "A watchmaker that machines its own escapements wanted an identity drawn from the same geometry as its movements — nothing decorative, everything earned.",
@@ -734,10 +739,10 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
       { src: px(6598819, 1400, 1000), caption: "Tools of the bench" },
       { src: px(989863, 1200, 1500), caption: "Helios optics study" },
     ],
-  },*/
+  },
 
   /* ================================ UI/UX ================================ */
- /* vanta: {
+  vanta: {
     id: "vanta",
     overview: [
       "Vanta's banking app carried institutional density — multi-currency accounts, statements and approvals — squeezed onto consumer screens. Users were getting lost before their first transfer.",
@@ -836,7 +841,7 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
         value: 6,
         suffix: "×",
         label: "Faster launch cycle",
-        note: "from months of drift to day of assembly",
+        note: "from months of drift to days of assembly",
       },
     ],
     screens: {
@@ -850,5 +855,5 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
       { src: px(6167445, 1400, 1000), caption: "Jar system with natural props" },
       { src: px(6167444, 1200, 1500), caption: "Marble surface arrangements" },
     ],
-  },*/
+  },
 };

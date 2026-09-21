@@ -5,7 +5,7 @@ export default function Work() {
   return (
     <section
       id="work"
-      className="mx-auto max-w-7xl scroll-mt-20 border-t border-line px-6 py-20 md:px-10 md:py-32"
+      className="render-lazy mx-auto max-w-7xl scroll-mt-20 border-t border-line px-6 py-20 md:px-10 md:py-32"
     >
       <SectionHeader
         label="Work"
